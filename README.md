@@ -4,9 +4,6 @@
 
 <summary style="font-size: 20px">🗣️ Versión en Español</summary>
 
-
-![diegudeveloper github io_Email_Simulator_](https://github.com/diegudeveloper/Email_Simulator/assets/62949966/d2648dbf-bd4c-4810-995a-307994496889)
-
 Este proyecto es un simulador de envío de correo electrónico a través de un formulario. Proporciona validaciones en cada campo de entrada y utiliza un spinner externo.
 
 <br><br>
