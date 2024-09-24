@@ -4,6 +4,8 @@
 
 <summary style="font-size: 20px">🗣️ Versión en Español</summary>
 
+<br><br>
+
 Este proyecto es un simulador de envío de correo electrónico a través de un formulario. Proporciona validaciones en cada campo de entrada y utiliza un spinner externo.
 
 <br><br>
