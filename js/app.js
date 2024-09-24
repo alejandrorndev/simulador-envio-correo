@@ -56,30 +56,34 @@ document.addEventListener('DOMContentLoaded', function() {
     
     //validacion del input
     function validar(e) {
-        // console.log(e.target.parentElement)
-        if(e.target.value.trim() === '' && e.target.id !== "emailCC") {
-            mensajeError(`El campo ${e.target.id} es Obligatorio`, e.target.parentElement)
+
+    if (e.target.value.trim() === '' && e.target.id !== "emailCC") {
+            mensajeError(`El campo ${e.target.id} es Obligatorio`, e.target.parentElement);
             correo[e.target.id] = "";
             comprobarEmail();
             return;
-        } 
+        }
 
-        
-        // if(!validarEmail(e.target.value) && e.target.id === "email")
-        if(e.target.value.trim() !== '' && e.target.id === 'emailCC' && !validarEmail(e.target.value)){
-        
-            mensajeError('El email con Copia no es valido', e.target.parentElement );
-            correo[e.target.id] = e.target.value.trim().toLowerCase;
+        // Validar el campo "email" y "emailCC" para que solo acepten correos válidos
+        if (e.target.id === 'email' && !validarEmail(e.target.value)) {
+            mensajeError('El email principal no es válido', e.target.parentElement);
+            correo[e.target.id] = "";
             comprobarEmail();
             return;
-        };
+        }
+
+        if (e.target.id === 'emailCC' && !validarEmail(e.target.value)) {
+            mensajeError('El email con Copia no es válido', e.target.parentElement);
+            correo[e.target.id] = "";
+            comprobarEmail();
+            return;
+        }
         
         limpiarAlerta(e.target.parentElement);
 
         //Asignar los valores
         correo[e.target.id] = e.target.value.trim().toLowerCase();
-        // console.log(correo)
-
+       
         comprobarEmail();
 
     }
@@ -116,7 +120,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function comprobarEmail() {
-        console.log(email);
         if (Object.values(correo).includes('')) {
             btnEnviar.classList.add('opacity-50');
             btnEnviar.disabled = true;
