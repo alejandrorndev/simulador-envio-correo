@@ -56,56 +56,43 @@ document.addEventListener('DOMContentLoaded', function() {
     
     //validacion del input
     function validar(e) {
-
-    if (e.target.value.trim() === '' && e.target.id !== "emailCC") {
-            mensajeError(`El campo ${e.target.id} es Obligatorio`, e.target.parentElement);
+        if (e.target.value.trim() === '' && e.target.id !== "emailCC") {
+            mostrarNotificacion(`El campo ${e.target.id} es obligatorio`, 'error');
             correo[e.target.id] = "";
             comprobarEmail();
             return;
         }
-
+    
         // Validar el campo "email" y "emailCC" para que solo acepten correos válidos
         if (e.target.id === 'email' && !validarEmail(e.target.value)) {
-            mensajeError('El email principal no es válido', e.target.parentElement);
+            mostrarNotificacion('El email principal no es válido', 'error');
+            correo[e.target.id] = "";
+            comprobarEmail();
+            return;
+        }
+    
+        if (e.target.id === 'emailCC' && !validarEmail(e.target.value)) {
+            mostrarNotificacion('El email con copia no es válido', 'error');
             correo[e.target.id] = "";
             comprobarEmail();
             return;
         }
 
-        if (e.target.id === 'emailCC' && !validarEmail(e.target.value)) {
-            mensajeError('El email con Copia no es válido', e.target.parentElement);
+           // Validar que el campo "asunto" no esté vacío
+        if (e.target.id === 'asunto' && e.target.value.trim() === '') {
+            mostrarNotificacion('El campo Asunto es obligatorio', 'error');
             correo[e.target.id] = "";
-            comprobarEmail();
             return;
         }
         
         limpiarAlerta(e.target.parentElement);
-
-        //Asignar los valores
+    
+        // Asignar los valores
         correo[e.target.id] = e.target.value.trim().toLowerCase();
-       
+    
         comprobarEmail();
-
     }
-
-    //creando mensaje de error
-    function mensajeError(mensaje, referencia) {
-
-        //comprobar si ya existe un alerta
-        const alerta = referencia.querySelector('.bg-red-600');
-        if (alerta) {
-            alerta.remove();
-        }
-
-
-        const error = document.createElement('P');
-        error.textContent = mensaje;
-       
-        error.classList.add('bg-red-600', 'text-white', 'p-2', 'text-center');
-
-        referencia.appendChild(error)
-    }
-
+    
     function limpiarAlerta(referencia) {
         const alerta = referencia.querySelector('.bg-red-600');
         if (alerta) {
@@ -138,6 +125,42 @@ document.addEventListener('DOMContentLoaded', function() {
         formulario.reset();
         comprobarEmail();
     }
+
+    function mostrarNotificacion(mensaje, tipo = 'error') {
+        const toastContainer = document.getElementById('toast-container');
+        
+        // Crear la notificación
+        const toast = document.createElement('div');
+        toast.className = `toast ${tipo}`;
+        toast.textContent = mensaje;
+        
+        // Estilos básicos
+        toast.style.background = tipo === 'error' ? 'red' : 'green';
+        toast.style.color = 'white';
+        toast.style.padding = '10px 20px';
+        toast.style.marginBottom = '10px';
+        toast.style.borderRadius = '5px';
+        toast.style.boxShadow = '0px 2px 5px rgba(0, 0, 0, 0.3)';
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.5s ease-in-out';
+        
+        // Agregar la notificación al contenedor
+        toastContainer.appendChild(toast);
+        
+        // Mostrar la notificación
+        setTimeout(() => {
+            toast.style.opacity = '1';
+        }, 100); // Retraso para que la transición funcione
+        
+        // Ocultar y eliminar la notificación después de 3 segundos
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => {
+                toastContainer.removeChild(toast);
+            }, 500); // Esperar a que la transición termine antes de eliminarla
+        }, 3000);
+    }
+    
     
 });
 

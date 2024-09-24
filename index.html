@@ -7,6 +7,8 @@
     <title>Envio de Emails</title>
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/spinner.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
 <body class="min-h-screen bg-slate-300">
     <div class="max-w-3xl mx-auto p-10">
@@ -14,23 +16,23 @@
         <div class="bg-white rounded-lg shadow-xl p-10 mt-5">
             <form id="formulario" class="space-y-3">
                 <div class="flex flex-col space-y-2">
-                    <label for="email" class="font-regular font-medium">Correo electrónico:</label>
-                    <input id="email" type="email" name="email" placeholder="Correo electrónico destino. ej: tunombre@midominio.com" class="border border-gray-300 px-3 py-2 rounded-lg"  />
+                    <label for="email" class="font-regular font-medium">Correo electrónico: <span class="text-red-500">*</span></label>
+                    <input id="email" type="email" name="email" placeholder="Correo electrónico destino. ej: tunombre@midominio.com" class="border border-gray-300 px-3 py-2 rounded-lg"  required/>
                 </div>
 
                 <div class="flex flex-col space-y-2">
-                    <label for="emailCC" class="font-regular font-medium">CC:</label>
-                    <input id="emailCC" type="email" name="emailCC" placeholder="Correo electrónico destino, ej: tunombre@midominio.com" class="border border-gray-300 px-3 py-2 rounded-lg"  />
+                    <label for="emailCC" class="font-regular font-medium">CC:<span class="text-red-500">*</span></label>
+                    <input id="emailCC" type="email" name="emailCC" placeholder="Correo electrónico destino, ej: tunombre@midominio.com" class="border border-gray-300 px-3 py-2 rounded-lg"  required/>
                 </div>
 
                 <div class="flex flex-col space-y-2">
-                    <label for="asunto" class="font-regular font-medium">Asunto:</label>
-                    <input id="asunto" type="text" name="asunto" placeholder="Asunto para correo" class="border border-gray-300 px-3 py-2 rounded-lg" />
+                    <label for="asunto" class="font-regular font-medium">Asunto:<span class="text-red-500">*</span></label>
+                    <input id="asunto" type="text" name="asunto" placeholder="Asunto para correo" class="border border-gray-300 px-3 py-2 rounded-lg" required/>
                 </div>
 
                 <div class="flex flex-col space-y-2">
-                    <label for="mensaje" class="font-regular font-medium">Mensaje:</label>
-                    <textarea id="mensaje" type="text" name="mensaje" placeholder="Mensaje de correo" class="border border-gray-300 px-3 py-2 rounded-lg h-36"></textarea>
+                    <label for="mensaje" class="font-regular font-medium">Mensaje:<span class="text-red-500">*</span></label>
+                    <textarea id="mensaje" type="text" name="mensaje" placeholder="Mensaje de correo" class="border border-gray-300 px-3 py-2 rounded-lg h-36" required></textarea>
                 </div>
 
                 <div id="botones" class="flex gap-5">
@@ -67,6 +69,14 @@
             </div>
         </div>
     </div>
+    <div id="toast-container" style="
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    "></div>
+
     <script src="js/app.js"></script>
 </body>
 </html>
