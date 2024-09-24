@@ -78,5 +78,3 @@ Si deseas contribuir a este proyecto, puedes seguir estos pasos:
 
 </details>
 
----
-<details>
